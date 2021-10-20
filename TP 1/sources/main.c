@@ -47,6 +47,8 @@ int main(int argc, char **argv) {
     computeN(config);
     new_chain(1, 5, config);
 
+    // Question 7
+
     freeConfig(config);
     freeCrypto();
 

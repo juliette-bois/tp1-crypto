@@ -10,6 +10,7 @@ Question 4
 
 Question 7
 -----------
+L'ajout du paramètre t dans la fonction h2i permet d'augmenter la couverture de la table car il y a moins de chance de "collision" avec 2 entrées différentes.
 
 Question 11
 -----------

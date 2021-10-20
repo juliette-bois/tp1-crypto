@@ -38,30 +38,30 @@ void displayDigest(const int length, byte* digest)
 
 char* computeI2C(int digest, struct Config* config, const int wordSize)
 {
-    if (DIGEST == NULL) {
-        DIGEST = calloc(wordSize, sizeof(char));
+    if (TEXT == NULL) {
+        TEXT = calloc(wordSize + 1, sizeof(char));
         digest_size = wordSize;
     } else if (digest_size < wordSize) {
-        DIGEST = (char*) realloc(DIGEST, wordSize * sizeof(char));
+        TEXT = (char*) realloc(TEXT, (wordSize + 1) * sizeof(char));
         digest_size = wordSize;
     }
-    int i = wordSize - 1;
-    DIGEST[i] = config->alphabet[digest % config->alphabet_size];
-    i--;
-    while (i >= 0) {
+
+    TEXT[wordSize] = '\0';
+    TEXT[wordSize - 1] = config->alphabet[digest % config->alphabet_size];
+
+    for (int i = wordSize - 2; i >= 0; i--) {
         digest = digest / config->alphabet_size;
-        DIGEST[i] = config->alphabet[digest % config->alphabet_size];
-        i--;
+        TEXT[i] = config->alphabet[digest % config->alphabet_size];
     }
 
-    return DIGEST;
+    return TEXT;
 }
 
 char* i2c(int digest, struct Config* config)
 {
     size_t i = config->min_size;
-    while((i <= config->max_size) && digest >= config->T[i - 1]) {
-        digest -= config->T[i - 1];
+    while((i <= config->max_size) && digest >= config->T[i - config->min_size]) {
+        digest -= config->T[i - config->min_size];
         i++;
     }
     return computeI2C(digest, config, i);
@@ -76,20 +76,23 @@ uint64_t h2i(byte* digest, int t, struct Config* config)
 uint64_t i2i(int digest, int i, struct Config* config)
 {
     char* c = i2c(digest, config);
-    byte* Hash;
+//    printf("%s\n", c);
+    byte Hash[MD5_DIGEST_LENGTH];
     H(c, Hash);
+//    displayDigest(MD5_DIGEST_LENGTH, Hash);
     return h2i(Hash, i, config);
 }
 
-uint64_t nouvelle_chaine(int idx1, size_t largeur, struct Config* config)
+uint64_t new_chain(int idx1, size_t weight, struct Config* config)
 {
-    uint64_t i1 = i2i(idx1, 1, config);
-    uint64_t n = i1;
-    for (size_t i = 2; i <= largeur; i++) {
-        n =  = i2i(n, i, config);
+    uint64_t n = i2i(idx1, 1, config); // i2
+    printf("chaine de taille 1 -> %llu\n", n);
+    for (size_t i = 2; i <= weight; i++) {
+        n = i2i(n, i, config);
+        printf("chaine de taille %lu -> ", i);
+        printf("%llu\n", n);
     }
     return n;
-    // nouvelle chaine on doit retourner une chaine de caractère ?
 }
 
 void freeCrypto()

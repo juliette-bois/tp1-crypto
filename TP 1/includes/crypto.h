@@ -22,7 +22,7 @@ void displayDigest(int length, byte* digest);
 char* i2c(int digest, struct Config* config);
 uint64_t h2i(byte* digest, int t, struct Config* config);
 uint64_t i2i(int digest, int i, struct Config* config);
-uint64_t nouvelle_chaine(int idx1, size_t largeur, struct Config* config);
+uint64_t new_chain(int idx1, size_t weight, struct Config* config);
 void freeCrypto();
 
 #endif //TP_1_CRYPTO_H

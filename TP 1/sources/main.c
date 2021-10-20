@@ -29,21 +29,26 @@ int main(int argc, char **argv) {
     char* word = i2c(1234567, config);
     printf("i2c -> %s\n", word);
 
-    // Question 5 TODO
+    // Question 5
     config->alphabet = "abcdefghijklmnopqrstuvwxyz";
     config->min_size = 4;
     config->max_size = 5;
     computeN(config);
     byte* oups = calloc(MD5_DIGEST_LENGTH, sizeof(byte));
     hash_MD5("oups", oups);
-    displayDigest(MD5_DIGEST_LENGTH, oups);
+    // displayDigest(MD5_DIGEST_LENGTH, oups);
     printf("h2i -> %llu\n", h2i(oups, 1, config));
     free(oups);
 
+    // Question 6
+    config->alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    config->min_size = 4;
+    config->max_size = 5;
+    computeN(config);
+    new_chain(1, 5, config);
+
     freeConfig(config);
     freeCrypto();
-
-    // Question 6
 
     return 0;
 }

@@ -2,6 +2,7 @@ Justifier le fait que j'ai fait le choix de passer la config en paramètre au li
 
 Avancée au moment du rendu du 20 octobre 2021 :
 Nous avons refait le projet en C.
+Nous essayons de débuger la question 6 : i2i(1) fonctionne mais pas i2i(2)
 
 Question 4
 -----------

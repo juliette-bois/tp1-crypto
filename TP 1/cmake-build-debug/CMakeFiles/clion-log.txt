@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" "/Users/juliette/Documents/Master 2/Cryptologie/TP 1"
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" "/Users/juliette/Documents/Sites/tp1-crypto/TP 1"
 -- The C compiler identification is AppleClang 13.0.0.13000029
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
